@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="header">
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" th:href="@{/css/formatting.css}">
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+	  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+<!--	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
+<!--	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2"></script>-->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+	<style>  
+		body {
+			background-color: ghostwhite;
+		}
+		#t1 tr td:first-child {
+			background-color: rgb(57, 57, 57);
+		}
+		#c1 {
+			color: ghostwhite;
+			font-weight: bold;
+		}
+		.view {
+            background-color: rgb(192, 192, 192);
+            color: black;
+        }
+        .new {
+            background-color: white;
+        }
+        .update{
+			background-color: white;
+			color: black;
+		}
+	</style>
+
+</head>
+	<nav th:fragment = "home" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">	
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/}">Home</a>
+			</li>     
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/login}">Login</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/signup}">Sign up</a>
+			</li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<nav th:fragment = "admin" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a id=c1> ADMIN</a>
+	  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">	      
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/admin}">Book List</a>
+			</li>
+			<li class="nav-item">
+	        	<a class="nav-link" th:href="@{/}"
+	        	onClick="if (!(confirm('Are you sure you want to logout?'))) return false">
+					Logout</a>
+			</li>
+	    </ul>
+	  </div>
+	</nav>
+		
+	<nav th:fragment = "user" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a id=c1> USER</a>
+	  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">	      
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/user}">Book List</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" th:href="@{/user/bought}">Bought</a>
+			</li>
+			<li class="nav-item">
+	        	<a class="nav-link" th:href="@{/}"
+	        	onClick="if (!(confirm('Are you sure you want to logout?'))) return false">
+					Logout</a>
+			</li>
+	    </ul>
+	  </div>
+	</nav>
+</html>

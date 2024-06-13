@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: header}"></head>
+
+<body>
+
+<nav th:replace="~{layout :: home}"></nav>
+
+	<br>
+	<div class="container">
+		<br>
+		<div class="alert alert-warning alert-dismissible" th:if="${mess} == 'error'">
+		    <button type="button" class="close" data-dismiss="alert">&times;</button>
+		    <p>Tai khoan da duoc dang ki!</p>
+		</div>
+		
+		<br>
+		<h3>Signup</h3><hr>
+		
+		 <form th:action="@{/signed}" th:object="${person}" method="POST" id="myForm" onsubmit="return validateForm()">
+
+
+		<!--  This will be used to bind to the employee that was clicked on (USED FOR UPDATES)-->
+		<input type="hidden" th:field="${person.personId}"/>
+		
+		<div class="form-group row">
+			<input type="text" id="email" class="form-control" placeholder="Email" th:field="${person.email}">
+		</div>
+		
+		<div class="form-group row">
+			<input type="text" id="usr" class="form-control" placeholder="Username" th:field="${person.username}">
+		</div>
+
+		<div class="form-group row">
+			<input type="password" id="pwd" class="form-control" placeholder="Password" th:field="${person.password}">
+		</div>
+		
+		<div class="form-group row-3">
+			<td><input type="radio" name="role" checked value="user">User</td><br>
+		</div>
+		<!--<div class="form-group row-3">
+			<td><input type="radio" name="role" value="admin">Admin</td>
+		</div>!-->
+
+		<hr>
+		<button class="btn btn-info col-2" type="submit">Signup</button>
+
+		</form>
+	</div>
+
+	<script>
+        	function validateForm() {
+				let	user = document.forms["myForm"]["usr"].value;
+				let pwd = document.forms["myForm"]["pwd"].value;
+				let email = document.forms["myForm"]["email"].value;
+				if (user == "" || pwd == "" || email == "") {
+				    alert("Username, password & email must be filled out");
+				    return false;
+			}
+		}
+        
+    </script>
+
+</body>
+
+</html>

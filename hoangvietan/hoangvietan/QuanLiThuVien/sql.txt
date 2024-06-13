@@ -1,0 +1,43 @@
+use btl_web;
+
+
+
+create table person(
+	id_person int auto_increment primary key,
+    username varchar(30),
+    password varchar(30),
+    role varchar(20),
+    active int,
+    email varchar(30)
+);
+
+create table book(
+	id_book int auto_increment primary key,
+    title varchar(30),
+    author varchar(30),
+    type varchar(30),
+    date varchar(30),
+    sold int,
+    page int,
+    description varchar(1000),
+    skin varchar(50)
+);
+
+
+create table sold(
+	id_person INT,
+    id_book INT,
+    CONSTRAINT FK_BOOK_ID FOREIGN KEY (id_book) REFERENCES book(id_book),
+    CONSTRAINT FK_PERSON_ID FOREIGN KEY (id_person) REFERENCES person(id_person),
+    PRIMARY KEY (id_book, id_person),
+    num int
+);
+
+create table rate(
+	id_rate int auto_increment primary key,
+    id_person int,
+    id_book int,
+    comment varchar(1000),
+    rating int,
+    email varchar(30)
+);

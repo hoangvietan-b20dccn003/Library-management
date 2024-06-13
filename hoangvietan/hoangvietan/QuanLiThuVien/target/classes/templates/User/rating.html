@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: header}"></head>
+
+<body>
+
+<nav th:replace="~{layout :: user}"></nav>
+
+	<br>
+	<div class="container center" style="margin: auto; width: 50%; border: 3px solid green; padding: 10px;">
+		<br>
+		<h3>Rating</h3><hr>
+		
+		<form th:action="@{/user/rated(id=${idbook})}" th:object="${rate}" method="POST">
+		<div class="form-group row">
+			
+			<div style="text-align: left; padding-left: 30px;">
+				<td>Please rate this book:</td>
+				<select type="text" name="rate" th:field="${rate.rating}">
+		        	<option th:value="1"> 1</option>
+		        	<option th:value="2"> 2</option>
+		        	<option th:value="3"> 3</option>
+		        	<option th:value="4"> 4</option>
+		        	<option th:value="5"> 5</option>
+				</select>
+				<i class="fa fa-star" style="font-size:20px;color:gold;"></i>
+			
+				<br>
+				<td>Leave a comment:</td><br>
+			</div>
+			
+			<textarea type="text" class="form-control" name="cmt" placeholder="Comment"
+			style="width: 700px; height: 300px; margin: auto; display: block;"></textarea>
+		</div>
+		
+		<hr>
+		<button class="btn btn-info col-2" type="submit">Send</button>
+
+		</form>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: header}"></head>
+
+<nav th:replace="~{layout :: home}"></nav>
+
+
+<body>
+
+	<br>
+	<div class="container">
+		<br>
+		<div class="alert alert-warning alert-dismissible" th:if="${mess} == 'error'">
+		    <button type="button" class="close" data-dismiss="alert">&times;</button>
+		    <p>Sai tai khoan hoac mat khau!</p>
+		</div>
+		
+		<br>
+		<h3>Login </h3><hr>
+				
+		<form th:action="@{/checkLogin}" method="post" id="myForm" onsubmit="return validateForm()">
+    		<div class="form-group">
+      			<label for="usr">Usename:</label>
+     			<input type="text" class="form-control" id="usr" name="username" value="">
+    		</div>
+    		<div class="form-group">
+			     <label for="pwd">Password:</label>
+			     <input type="password" class="form-control" id="pwd" name="pass" value="">
+    		</div>
+	    	<button type="submit" class="btn btn-info col-2">Submit</button>
+  		</form>
+		
+	</div>
+
+	<script>
+        	function validateForm() {
+				let	user = document.forms["myForm"]["usr"].value;
+				let pwd = document.forms["myForm"]["pwd"].value;
+				if (user == "" || pwd == "") {
+				    alert("Username & password must be filled out");
+				    return false;
+			}
+		}
+        
+    </script>
+
+</body>
+
+</html>

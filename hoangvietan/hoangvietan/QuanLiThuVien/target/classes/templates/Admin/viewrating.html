@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: header}"></head>
+
+
+<body>
+
+<nav th:replace="~{layout :: admin}"></nav>
+
+<div class="container">	
+    <br>
+    <div class="form-group row"><h2 style="margin: auto; display: block;"  th:text="${book.title}"/></div>
+    <hr>
+
+    <form id="myForm">
+	
+		<table style="width: 1200px;">
+			<td style="width: 600px;">
+				    <img id="uploadedImage" name="imgUploaded" th:src="@{${book.skinpath}}" alt="" style="max-width: 70%;">
+			</td>
+			<td style="width: 600px;">
+			    <div class="form-group row">
+			        <div style="display: inline-block; margin-right: 2%;">
+						<h6>Title</h6>
+			            <input type="text" th:field="${book.title}" th:class="add" disabled>
+			        </div>
+			        <div style="display: inline-block;">
+						<h6>Author</h6>
+			            <input type="text" th:field="${book.author}" th:class="add" disabled>
+			        </div>
+			    </div>
+			    
+			    <div class="form-group row">
+					<div style="display: inline-block;">
+						<h6>Description</h6>
+				        <textarea type="text" th:field="${book.description}" 
+				        style="width: 387px; height: 300px;"
+				        th:class="add" disabled></textarea>
+					</div>
+			    </div>
+			       
+			    <div class="form-group row">
+			        <div style="display: inline-block; margin-right: 2%;">
+						<h6>Date</h6> 
+			            <input id="dp3" type="text" th:field="${book.date}"
+			            th:class="add" disabled>
+			        </div>
+			        
+			        <div style="display: inline-block;">
+						<h6>Page's number</h6> 
+			            <input type="text" th:field="${book.page}" th:class="add" disabled>
+			        </div>
+			    </div>
+			    
+			    <div class="form-group row">
+					<div style="display: inline-block;">
+						<h6>Type</h6>
+				        <input type="text" th:field="${book.type}" th:class="add" disabled>
+					</div>
+			    </div>
+			</td>
+		</table><hr>
+    </form>
+    
+    <h4>Comment</h4><hr>
+    <table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>Email</th>
+						<th>Comment</th>
+						<th>Rating</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rate : ${rates}">
+						<td th:text="${rate.email}"/>
+						<td th:text="${rate.cmt}"/>
+						<td>
+							<i class="fa fa-star" style="font-size:20px;color:gold;" th:if="${rate.rating}>=1"></i>
+							<i class="fa fa-star" style="font-size:20px;color:gold;" th:if="${rate.rating}>=2"></i>
+							<i class="fa fa-star" style="font-size:20px;color:gold;" th:if="${rate.rating}>=3"></i>
+							<i class="fa fa-star" style="font-size:20px;color:gold;" th:if="${rate.rating}>=4"></i>
+							<i class="fa fa-star" style="font-size:20px;color:gold;" th:if="${rate.rating}>=5"></i>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+</div>
+
+</body>
+
+
+</html>

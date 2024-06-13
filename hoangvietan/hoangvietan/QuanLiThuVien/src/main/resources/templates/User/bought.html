@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: header}"></head>
+
+<nav th:replace="~{layout :: user}"></nav>
+
+	<body>
+
+		<div class="container">
+			<br>
+			<h3>Book Lists</h3>
+			<hr>
+			<table style="width: 1000px;">
+				<td style="width: 600px;">
+					<table class="table table-bordered table-striped">
+						<thead class="thead-dark">
+							<tr>
+								<th style="width: 170px;">Skin</th>
+								<th>Title</th>
+								<th>Author</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="book : ${books}">
+								<td>
+									<img th:src="@{${book.skinpath}}" style="width: 150px;height: 200px;">
+								</td>
+								<td th:text="${book.title}"/>
+								<td th:text="${book.author}"/>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td style="width: 200px;">
+					<table class="table table-bordered table-striped">
+						<thead class="thead-dark">
+							<tr>
+								<th>Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="sold : ${solds}" style="height: 225px;">
+								<td th:text="${sold.num}"/>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td style="width: 200px;">
+					<table class="table table-bordered table-striped">
+						<thead class="thead-dark">
+							<tr>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="book : ${books}" style="height: 225px;">
+								<td>
+									<a th:href="@{/user/cancelbuy(id=${book.bookId})}"
+										class="btn btn-danger btn-sm"
+										onClick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
+										Delete
+									</a>
+		
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+		</div>
+	</body>
+
+</html>

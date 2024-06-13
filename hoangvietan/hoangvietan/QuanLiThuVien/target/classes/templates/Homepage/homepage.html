@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: header}"></head>
+
+<nav th:replace="~{layout :: home}"></nav>
+
+	<body>
+
+		<div class="container">
+			<br>
+			<div class="alert alert-success alert-dismissible" th:if="${mess} == 'success'">
+			    <button type="button" class="close" data-dismiss="alert">&times;</button>
+			    <p>Dang ki thanh cong!</p>
+			</div>
+			
+			<br>
+			<div class="form-group row">
+				<h2 style="margin: auto; display: block;">Quản lí thư viện</h2>
+			</div>
+			<hr>
+			<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>Title</th>
+						<th>Author</th>
+						<th>Type</th>
+						<th>Sold</th>
+						<th>Date</th>
+						<th>Number of page</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.title}"/>
+						<td th:text="${book.author}"/>
+						<td th:text="${book.type}"/>
+						<td th:text="${book.sold}"/>
+						<td th:text="${book.date}"/>
+						<td th:text="${book.page}"/>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</body>
+
+</html>

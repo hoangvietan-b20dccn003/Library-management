@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: header}"></head>
+
+<nav th:replace="~{layout :: admin}"></nav>
+
+	<body>
+
+		
+		<br>
+			<br>
+			<div class="alert alert-success alert-dismissible" th:if="${mess} == 'save'">
+			    <button type="button" class="close" data-dismiss="alert">&times;</button>
+			    <p>Ban da them 1 cuon sach!</p>
+			</div>
+			<div class="alert alert-success alert-dismissible" th:if="${mess} == 'update'">
+			    <button type="button" class="close" data-dismiss="alert">&times;</button>
+			    <p>Ban da cap nhat 1 cuon sach!</p>
+			</div>
+			<div class="alert alert-success alert-dismissible" th:if="${mess} == 'delete'">
+			    <button type="button" class="close" data-dismiss="alert">&times;</button>
+			    <p>Ban da xoa 1 cuon sach!</p>
+			</div>
+			
+			<br>
+			<h3>Book Lists</h3>
+			<hr>
+			<a th:href="@{/admin/new}"
+				class="btn btn-info btn">
+				Add a new book
+			</a><hr>
+			<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>Title</th>
+						<th>Author</th>
+						<th>Type</th>
+						<th>Sold</th>
+						<th>Date</th>
+						<th>Number of page</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.title}"/>
+						<td th:text="${book.author}"/>
+						<td th:text="${book.type}"/>
+						<td th:text="${book.sold}"/>
+						<td th:text="${book.date}"/>
+						<td th:text="${book.page}"/>
+						<td>
+							<a th:href="@{/admin/view(id=${book.bookId})}"
+								class="btn btn-warning btn-sm">
+								View
+							</a>
+							
+					<!--		<a th:href="@{/admin/viewrating(id=${book.bookId})}"
+								class="btn btn-info btn-sm">
+								Rating
+							</a>    -->
+							
+							<a th:href="@{/admin/delete(id=${book.bookId})}"
+								class="btn btn-danger btn-sm"
+								onClick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
+								Delete
+							</a>
+
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: header}"></head>
+
+
+<body>
+
+<nav th:replace="~{layout :: admin}"></nav>
+
+<div class="container">	
+	<div class="alert alert-success alert-dismissible" th:if="${mess} == 'error'">
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    <p>Sach da ton tai!</p>
+	</div>
+	
+    <br>
+    <h3> Add a new Book </h3><hr>
+
+    <form th:action="@{/admin/save(action=${action}, id=${book.bookId})}" th:object="${book}" method="POST" id="myForm" 
+    		enctype="multipart/form-data" onsubmit="return validateForm()">
+	
+	<table style="width: 1200px;">
+	<td style="width: 600px;">
+	    <div class="form-group row">
+	        <div style="display: inline-block; margin-right: 2%;">
+				<h6>Title</h6>
+	            <input type="text" placeholder="Title" th:field="${book.title}" name="title"
+	            th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}">
+	        </div>
+	       
+	        <div style="display: inline-block;">
+				<h6>Author</h6>
+	            <input type="text" placeholder="Author" th:field="${book.author}" name="author"
+	            th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}">
+	        </div>
+	    </div>
+	    
+	    <div class="form-group row">
+			<div style="display: inline-block;">
+				<h6>Description</h6>
+		        <textarea type="text" name="des" placeholder="Description" th:field="${book.description}" 
+		        style="width: 387px; height: 300px;"
+		        th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}"></textarea>
+			</div>
+	    </div>
+	        
+	    <div class="form-group row">
+	        <div style="display: inline-block; margin-right: 2%;">
+				<h6>Date</h6>
+	            <input id="dp3" name="date" type="text" value="Start Date" placeholder="Date" th:field="${book.date}"
+	            th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}">
+	        </div>
+	        <script type="text/javascript">
+	            $('#dp3').datepicker();
+	        </script>
+	        
+	        <div style="display: inline-block;">
+				<h6>Page's number</h6>
+	            <input type="text" name="page" onkeypress='return event.charCode >= 48 && event.charCode <= 57' 
+	            placeholder="Num page" th:field="${book.page}"
+	            th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}">
+	        </div>
+	    </div>
+	    
+	    
+	    <div class="form-group row">
+			<div style="display: inline-block;">
+				<h6>Type</h6>
+		        <select type="text" name="type" placeholder="Type" th:field="${book.type}"
+		        th:class="${action == 'view' ? 'view' : 'add'}" th:disabled="${action == 'view'}">
+		        	<option th:value="All"> Type</option>
+					<option th:value="Trinhtham"> Trinh thám</option>
+					<option th:value="Truyentranh"> Truyện tranh</option>
+					<option th:value="Tieuthuyet"> Tiểu thuyết</option>
+					<option th:value="Haikich"> Hài Kịch</option>
+					<option th:value="Thethao"> Thể Thao</option>
+					<option th:value="Langmang"> Lãng Mạng</option>
+					<option th:value="Giaoduc"> Giáo Dục</option>
+					<option th:value="Giadinh"> Gia Đình</option>
+					<option th:value="Thienvanhoc"> Thiên Văn Học</option>
+					<option th:value="Hinhsu"> Hình Sự</option>
+					<option th:value="Khampha"> Khám Phá</option>
+				</select>
+	    	</div>
+	    </div>
+	</td>   
+	<td style="width: 600px;">
+		    <div class="form-group row">
+		       <input type="file" id="imageUpload" name="imageUpload" accept=".jpg, .jpeg, .png">
+		       
+		    </div>
+		    <img id="uploadedImage" name="imgUploaded" src="#" alt="" style="max-width: 50%;" th:if="${action}=='new'">
+		    <img id="uploadedImage" name="imgUploaded" th:src="@{${book.skinpath}}" alt="" style="max-width: 50%;" th:if="${action}!='new'">
+	</td>
+	
+
+
+	</table><hr>
+	
+	<div class="form-group" style="text-align: right; padding-right: 20%;">
+		<button type="submit" th:if="${action}=='new'">Add</button>
+		<button type="submit" th:if="${action}=='update'">Save</button>
+		<button type="submit" th:if="${action}=='view'">Edit</button>
+	</div>
+	
+
+    </form>
+    
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    $('#uploadedImage').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $("#imageUpload").change(function() {
+            readURL(this);
+        });
+        
+		function validateForm() {
+			let title = document.forms["myForm"]["title"].value;
+			let author = document.forms["myForm"]["author"].value;
+			let type = document.forms["myForm"]["type"].value;
+			let date = document.forms["myForm"]["dp3"].value;
+			let page = document.forms["myForm"]["page"].value;
+			if (title == "" || author == "" || date == "") {
+			    alert("Title, author & date must be filled out");
+			    return false;
+			}
+		}
+        
+    </script>
+   
+</div>
+
+</body>
+
+
+</html>
